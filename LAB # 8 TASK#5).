@@ -1,0 +1,91 @@
+//24K-0559 BAZIL-UDDIN-KHAN
+#include <iostream>
+using namespace std;
+
+class Fraction
+{
+    int denominator;
+    int numerator;
+    
+    public:
+    Fraction()
+    {
+        denominator =0;
+        numerator =0;
+    }
+    
+    Fraction(int nime,int demi) : denominator(demi),numerator(nime)
+    {
+        if(denominator ==0)
+        {
+            cout << " Cant Procced Further As Denominator Is 0 " << endl;
+            exit(1);
+        }
+    }
+    
+    friend ostream & operator<<(ostream& os,Fraction & frac);
+    
+    Fraction operator+(Fraction fraction)
+    {
+            return Fraction(numerator*fraction.denominator + fraction.numerator*denominator,fraction.denominator*denominator);
+    }
+    
+    Fraction operator/(Fraction fraction)
+    {
+        if (fraction.numerator == 0) 
+        {
+         cout << "Cannot divide by zero fraction." << endl;
+         exit(1);
+        }
+            return Fraction(numerator* fraction.denominator,fraction.numerator*denominator);
+    }
+    
+Fraction operator-(Fraction fraction)
+ {
+            return Fraction(numerator*fraction.denominator - fraction.numerator*denominator,fraction.denominator*denominator);
+    }
+    
+Fraction operator*(Fraction fraction)
+    {
+            return Fraction(numerator*  fraction.numerator,fraction.denominator*denominator);
+    }
+};
+
+ostream &  operator<<(ostream & os,Fraction & frac)
+{
+    os << " Fraction Numerator /Denominator = " << frac.numerator << "/" << frac.denominator << endl;
+    return os;
+    
+}
+int main()
+{
+    Fraction fraction1(2,3);
+    Fraction fraction2(3,4);
+    cout << fraction1 << endl;
+    cout << fraction2 << endl;
+    cout << " ADDITION OF FRACTION " << endl;
+    
+    Fraction fraction3;
+    fraction3 = fraction2 + fraction1;
+    cout << fraction3 << endl;
+    
+    cout << " Subtraction OF FRACTION " << endl;
+    
+    Fraction fraction4;
+    fraction4 = fraction2 - fraction1;
+    cout << fraction4 << endl;
+    
+    cout << " Multiplication OF FRACTION " << endl;
+     Fraction fraction6;
+    fraction6 = fraction2 * fraction1;
+    cout << fraction6 << endl;
+    
+    cout << " Division OF FRACTION " << endl;
+    
+    Fraction fraction5;
+    fraction5 = fraction1 / fraction2;
+    cout << fraction5 << endl;
+    
+    
+    return 0;
+}
