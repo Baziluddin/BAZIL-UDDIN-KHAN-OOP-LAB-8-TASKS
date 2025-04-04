@@ -1,0 +1,47 @@
+//Bazil-Uddin-Khan 24k-0559 Bscs-2H
+
+#include <iostream>
+using namespace std;
+
+class Humidity;
+
+class Temperature
+{
+    double Temp;
+    
+    public:
+    Temperature(double temp) : Temp(temp)
+    {}
+    
+    friend void calculateHeatIndex(Temperature temperature , Humidity humid);
+    
+};
+
+
+class Humidity
+{
+    double HumidvalueInPercentage;
+    
+    public:
+    Humidity(double humidvalue) : HumidvalueInPercentage(humidvalue)
+    {}
+    
+    friend void calculateHeatIndex(Temperature temperature , Humidity humid);
+    
+};
+
+void calculateHeatIndex(Temperature temperature , Humidity humid)
+{
+    double HumidIndex = (-8.146) + (1.6114 * temperature.Temp) + (2.33885 * humid.HumidvalueInPercentage) + (0.0123* temperature.Temp * temperature.Temp);
+    cout << " Heat Index Is = " << HumidIndex << endl;
+}
+
+int main()
+{
+    Temperature temperature(32);
+    Humidity humid(70);
+    calculateHeatIndex(temperature,humid);
+    
+
+    return 0;
+}
