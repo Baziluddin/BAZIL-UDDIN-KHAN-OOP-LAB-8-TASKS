@@ -1,0 +1,92 @@
+// Bazil-Uddin-Khan 24k-0559 
+#include <iostream>
+using namespace std;
+
+
+class Currency
+{
+    private:
+    double currencyValue;
+    string CurrencyYear;
+    
+    public:
+    Currency()
+    {
+        currencyValue =0.0;
+        CurrencyYear = " ";
+    }
+    
+    Currency(double value, string year):currencyValue(value),CurrencyYear(year)
+    {}
+    
+    Currency operator-()
+    {
+        return Currency (-currencyValue,CurrencyYear);
+    }
+    
+    Currency operator+(Currency currency)
+    {
+        return Currency(currencyValue + currency.currencyValue ,CurrencyYear);
+        
+    }
+    
+    Currency operator-(Currency currency)
+    {
+        return Currency(currencyValue - currency.currencyValue , CurrencyYear);
+        
+    }
+    
+    Currency& operator+=(Currency currency)
+    {
+    
+        currencyValue = (currency.currencyValue + currencyValue);
+        CurrencyYear = currency.CurrencyYear;
+        return *this;
+        
+    }
+    
+    Currency& operator-=(Currency currency)
+    {
+        
+        currencyValue =currencyValue - currency.currencyValue ;
+        CurrencyYear = currency.CurrencyYear;
+        return *this;
+        
+    }
+    
+    friend  ostream& operator<<(ostream&os,Currency currency);
+    
+};
+
+ostream& operator<<(ostream&os,Currency currency)
+{
+    os << "Cuurency Value " << currency.currencyValue << " Currency Year " << currency.CurrencyYear << endl;
+    return os;
+}
+
+int main()
+{
+    Currency currency1(100,"2023");
+    Currency currency2(50,"2025");
+    Currency currency3;
+    currency3 = -(currency1);
+    cout << " Negation Unary Operator " << endl;
+    cout << "Currency 3 is " << currency3 << endl;
+    Currency currency4;
+    
+    currency4 = currency1 + currency2;
+    cout << " Addition Operator " << endl;
+    cout << "Currency 4 is " << currency4 << endl;
+    
+    cout << " Subtraction Operator " << endl;
+    currency4 = currency1 - currency2;
+    cout << "Currency 4 is " << currency4 << endl;
+     
+    cout << " Assignment + operator " << endl;
+    currency1 += currency2;
+    cout << "Currency 1 is " << currency1 << endl;
+    cout << " Assignment - operator " << endl;
+    currency1 -= currency2;
+    cout << "Currency 1 is " << currency1 << endl;
+    return 0;
+}
