@@ -1,0 +1,55 @@
+// Bazil-Uddin-Khan24k-0559 
+
+#include <iostream>
+using namespace std;
+
+class Librarian;
+
+class Book
+{
+    private:
+    string title;
+    double price;
+    friend class Librarian;
+    
+    public:
+    Book(string Title,double Price) : title(Title),price(Price)
+    {}
+    
+};
+
+
+class Librarian
+{
+    public:
+    Librarian() {}
+    
+    void displayDetails(Book book)
+    {
+        cout << " Book Title is  " << book.title << " Book price is " << book.price << endl;
+    }
+    
+    void ApplyDiscount(Book & book)
+    {
+        double oldprice = book.price;
+        book.price = book.price -  (oldprice * 0.1);
+        
+        cout << " Book Title Is " << book.title << endl;
+        cout << " Book price is " << book.price << endl;
+    }
+
+};
+int main() 
+{
+    Book book("The Wolf on the moon",560);
+    Librarian library;
+    cout << " Library Info Before Update " << endl;
+    library.displayDetails(book);
+    
+    
+    cout << " Library Info After Update " << endl;
+    library.ApplyDiscount(book);
+    
+
+    return 0;
+}
