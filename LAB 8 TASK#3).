@@ -1,0 +1,104 @@
+// Bazil-Uddin-Khan24k-0559 
+#include <iostream>
+using namespace std;
+
+class Teacher;
+
+class Student
+{
+    private:
+    string name;
+    double grades[3];
+    friend class Teacher;
+    
+    public:
+    Student()
+    {}
+    
+    Student(string Name,double grade1,double grade2,double grade3) : name(Name)
+    {
+        grades[0] = grade1;
+        grades[1] = grade2;
+        grades[2] = grade3;
+    }
+    
+    
+    friend void calculateAverageGrade(Student student);
+};
+
+class Teacher
+{
+    public:
+    Teacher()
+    {}
+    
+    void displayDetails(Student student)
+    {
+        cout << " Student Name Is = " << student.name << endl;
+        for(int y =0; y<3;y++)
+        {
+            cout << " Grade  " << y+1 << 
+             "  " << student.grades[y] << endl;
+        }
+    }
+    
+    
+    
+    
+    void UpdateGrade(int index,Student & student)
+    {
+        if(index >=0 && index < 3)
+        {
+            double grade;
+            cout << " Enter New Grade " << endl;
+            cin >> grade;
+            if(grade >=0 && grade <=100)
+            {
+                student.grades[index] = grade;
+            }
+            else
+            {
+                cout << " Sorry Enter Within Range " << endl;
+            }
+            
+            
+        }
+        else
+         {
+             cout <<" Error Cant Update Value " << endl;
+         }
+        
+    }
+};
+
+void calculateAverageGrade(Student student)
+{
+    double TotalGrade =0;
+    for(int u =0; u<3;u++)
+    {
+        TotalGrade = TotalGrade + (student.grades[u]);
+    }
+    
+    cout << " Average Grade is " << (TotalGrade/3) << endl;
+}
+
+
+
+int main()
+{
+    Student student("Qasim",45,67,89);
+    
+    Teacher teacher;
+    cout << " Grades Info Before Update " << endl;
+    
+    teacher.displayDetails(student);
+    calculateAverageGrade(student);
+    
+     cout << " Grades Info After Update " << endl;
+    teacher.UpdateGrade(2,student);
+    teacher.displayDetails(student);
+    calculateAverageGrade(student);
+    
+
+    return 0;
+}
